@@ -21,6 +21,12 @@ struct Github_PR_NotifierApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     var popover = NSPopover.init()
     var statusBar: NSStatusItem?
+    var prCount: Int = 0 {
+        didSet {
+            updateStatusBar()
+        }
+    }
+
     
     override init() {
         super.init()
@@ -33,7 +39,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let button = statusBar?.button {
             button.action = #selector(togglePopover(_:))
-            button.image = NSImage(named: NSImage.Name("LogoIcon"))
+        }
+        
+        updateStatusBar()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.prsCountDidChange(_:)), name: .prsCountDidChange, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func updateStatusBar() {
+        guard let button = statusBar?.button else { return }
+        let statusItemView = NSHostingView(rootView: StatusItemView(count: prCount))
+        statusItemView.frame = button.bounds
+        button.addSubview(statusItemView)
+    }
+    
+    @objc func prsCountDidChange(_ notification: Notification) {
+        if let count = notification.userInfo?["count"] as? Int {
+            prCount = count
         }
     }
     

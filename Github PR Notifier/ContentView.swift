@@ -131,6 +131,9 @@ struct ContentView: View {
                             switch result {
                                 case .success(let pullRequests):
                                     self.pullRequests = pullRequests
+                                    DispatchQueue.main.async {
+                                        NotificationCenter.default.post(name: .prsCountDidChange, object: nil, userInfo: ["count": pullRequests.count])
+                                    }
                                 case .failure(let error):
                                     print("Error fetching pull requests: \(error)")
                             }

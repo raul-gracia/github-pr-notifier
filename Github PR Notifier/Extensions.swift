@@ -42,3 +42,20 @@ extension String {
         return lowercase.capitalized
     }
 }
+
+extension Notification.Name {
+    static let prsCountDidChange = Notification.Name("prsCountDidChange")
+}
+
+extension NSImage {
+    convenience init(view: NSView) {
+        let size = view.bounds.size
+        self.init(size: size)
+        view.bounds = CGRect(origin: CGPoint(), size: size)
+        view.displayIfNeeded()
+        lockFocus()
+        guard let context = NSGraphicsContext.current else { return }
+        view.layer?.render(in: context.cgContext)
+        unlockFocus()
+    }
+}
