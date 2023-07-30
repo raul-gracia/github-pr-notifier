@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9EBE1D092A75C5F700DAB8F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */; };
 		9ECE34392A726EE000A2276E /* Github_PR_NotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34382A726EE000A2276E /* Github_PR_NotifierApp.swift */; };
 		9ECE343B2A726EE000A2276E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE343A2A726EE000A2276E /* ContentView.swift */; };
 		9ECE343D2A726EE200A2276E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE343C2A726EE200A2276E /* Assets.xcassets */; };
@@ -14,6 +15,9 @@
 		9ECE344B2A726EE200A2276E /* Github_PR_NotifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE344A2A726EE200A2276E /* Github_PR_NotifierTests.swift */; };
 		9ECE34552A726EE200A2276E /* Github_PR_NotifierUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34542A726EE200A2276E /* Github_PR_NotifierUITests.swift */; };
 		9ECE34572A726EE200A2276E /* Github_PR_NotifierUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34562A726EE200A2276E /* Github_PR_NotifierUITestsLaunchTests.swift */; };
+		9ECE34642A72939F00A2276E /* StatusItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34632A72939F00A2276E /* StatusItemView.swift */; };
+		9ECE34662A7293CE00A2276E /* GithubService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34652A7293CE00A2276E /* GithubService.swift */; };
+		9ECE34682A73B4DE00A2276E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34672A73B4DE00A2276E /* Models.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9EBE1D072A747AB700DAB8F4 /* Github-PR-Notifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Github-PR-Notifier-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9ECE34352A726EE000A2276E /* Github PR Notifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Github PR Notifier.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ECE34382A726EE000A2276E /* Github_PR_NotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_PR_NotifierApp.swift; sourceTree = "<group>"; };
 		9ECE343A2A726EE000A2276E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +51,9 @@
 		9ECE34502A726EE200A2276E /* Github PR NotifierUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Github PR NotifierUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ECE34542A726EE200A2276E /* Github_PR_NotifierUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_PR_NotifierUITests.swift; sourceTree = "<group>"; };
 		9ECE34562A726EE200A2276E /* Github_PR_NotifierUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_PR_NotifierUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9ECE34632A72939F00A2276E /* StatusItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItemView.swift; sourceTree = "<group>"; };
+		9ECE34652A7293CE00A2276E /* GithubService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubService.swift; sourceTree = "<group>"; };
+		9ECE34672A73B4DE00A2276E /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +104,16 @@
 		9ECE34372A726EE000A2276E /* Github PR Notifier */ = {
 			isa = PBXGroup;
 			children = (
+				9EBE1D072A747AB700DAB8F4 /* Github-PR-Notifier-Info.plist */,
 				9ECE34382A726EE000A2276E /* Github_PR_NotifierApp.swift */,
 				9ECE343A2A726EE000A2276E /* ContentView.swift */,
 				9ECE343C2A726EE200A2276E /* Assets.xcassets */,
 				9ECE34412A726EE200A2276E /* Github_PR_Notifier.entitlements */,
 				9ECE343E2A726EE200A2276E /* Preview Content */,
+				9ECE34632A72939F00A2276E /* StatusItemView.swift */,
+				9ECE34652A7293CE00A2276E /* GithubService.swift */,
+				9ECE34672A73B4DE00A2276E /* Models.swift */,
+				9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */,
 			);
 			path = "Github PR Notifier";
 			sourceTree = "<group>";
@@ -259,8 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ECE34642A72939F00A2276E /* StatusItemView.swift in Sources */,
+				9EBE1D092A75C5F700DAB8F4 /* Extensions.swift in Sources */,
 				9ECE343B2A726EE000A2276E /* ContentView.swift in Sources */,
+				9ECE34662A7293CE00A2276E /* GithubService.swift in Sources */,
 				9ECE34392A726EE000A2276E /* Github_PR_NotifierApp.swift in Sources */,
+				9ECE34682A73B4DE00A2276E /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Github PR Notifier/Github_PR_Notifier.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -424,6 +443,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Github-PR-Notifier-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Github PR Notifier";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -442,6 +465,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Github PR Notifier/Github_PR_Notifier.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -451,6 +475,10 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Github-PR-Notifier-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Github PR Notifier";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -469,6 +497,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WEQJVQR4NT;
@@ -488,6 +517,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WEQJVQR4NT;
