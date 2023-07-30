@@ -9,76 +9,125 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var pullRequests: [PullRequest] = []
+    @State private var isLoading: Bool = false
+    @State private var isTokenInputPresented: Bool = false
+    var token: String? {
+        GithubService.shared.token
+    }
+    @ObservedObject var githubService = GithubService.shared
     
     
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(pullRequests, id: \.id) { pullRequest in
-                        PullRequestRow(pullRequest: pullRequest)
+        GeometryReader { geometry in
+            VStack {
+                // If there's no token, show a message
+                if githubService.token.isEmpty {
+                    
+                    VStack {
+                        Spacer()
+                        Text("Please set your GitHub token to load pull requests.")
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        Spacer()
                     }
-                    .padding(.all, 8.0)
-                }
-            }
-            .padding(.bottom, 5)
-            
-            HStack {
-                Button(action: {
-                    NSApplication.shared.terminate(self)
-                }) {
-                    Text("Quit App")
-                        .foregroundColor(Color.white)
-                        .padding(.all, 5.0)
-                        .background(Color.red)
-                        .cornerRadius(5.0)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.leading, 15)
-                
-                Spacer()
-                
-                Button(action: {
-                    refreshPRs()
-                }) {
-                    Text("Refresh")
-                        .foregroundColor(Color.white)
-                        .padding(.all, 5.0)
-                        .background(Color.blue)
-                        .cornerRadius(5.0)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .padding(.trailing, 15)
-            }
-            .frame(height: 30)
-        }
-        .onAppear {
-            GithubService.shared.fetchCurrentUser { result in
-                switch result {
-                    case .success(let user):
-                        GithubService.shared.fetchPullRequests(for: user.login) { result in
-                            DispatchQueue.main.async {
-                                switch result {
-                                    case .success(let pullRequests):
-                                        self.pullRequests = pullRequests
-                                    case .failure(let error):
-                                        print("Error fetching pull requests: \(error)")
-                                }
+                    .frame(width: geometry.size.width, height: geometry.size.height - 50)
+                } else if self.isLoading {
+                    VStack {
+                        Spacer()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(2)
+                        Spacer()
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height - 50)
+                } else {
+                    ScrollView {
+                        VStack(alignment: .leading) {
+                            ForEach(self.pullRequests, id: \.id) { pullRequest in
+                                PullRequestRow(pullRequest: pullRequest)
                             }
+                            .padding(.all, 8.0)
                         }
-                    case .failure(let error):
-                        print("Error fetching current user: \(error)")
+                    }
+                    .padding(.bottom, 5)
                 }
+                
+                HStack {
+                    Button(action: {
+                        NSApplication.shared.terminate(self)
+                    }) {
+                        Text("Quit App")
+                            .foregroundColor(Color.white)
+                            .padding(.all, 5.0)
+                            .background(Color.red)
+                            .cornerRadius(5.0)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.leading, 15)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        self.isTokenInputPresented = true
+                    }) {
+                        Text(GithubService.shared.token.isEmpty ? "Set Token" : "Change Token")
+                            .foregroundColor(Color.white)
+                            .padding(.all, 5.0)
+                            .background(Color.green)
+                            .cornerRadius(5.0)
+                            .popover(isPresented: self.$isTokenInputPresented) {
+                                TokenInputView(isPresented: self.$isTokenInputPresented, onSave: self.refreshPRs)
+                            }
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        self.refreshPRs()
+                    }) {
+                        Text("Refresh")
+                            .foregroundColor(Color.white)
+                            .padding(.all, 5.0)
+                            .background(Color.blue)
+                            .cornerRadius(5.0)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .padding(.trailing, 15)
+                }
+                .frame(height: 50)
             }
+            .onAppear {
+                self.loadToken()
+                
+            }
+            
         }
     }
     
+    private func loadToken() {
+        if let storedToken = UserDefaults.standard.string(forKey: "GithubToken") {
+            githubService.token = storedToken
+            self.isTokenInputPresented = false
+            self.refreshPRs()
+        } else {
+            self.isTokenInputPresented = true
+        }
+    }
+    
+    
     func refreshPRs() {
+        guard !GithubService.shared.token.isEmpty else {
+            print("Token is not set, aborting refreshPRs.")
+            return
+        }
+        isLoading = true
         GithubService.shared.fetchCurrentUser { result in
             switch result {
                 case .success(let user):
                     GithubService.shared.fetchPullRequests(for: user.login) { result in
                         DispatchQueue.main.async {
+                            self.isLoading = false
                             switch result {
                                 case .success(let pullRequests):
                                     self.pullRequests = pullRequests
@@ -92,6 +141,7 @@ struct ContentView: View {
             }
         }
     }
+    
 }
 
 
@@ -100,7 +150,6 @@ struct PullRequestRow: View {
     
     var body: some View {
         Button(action: {
-            // Make sure to safely unwrap the URL
             if let url = URL(string: pullRequest.url) {
                 NSWorkspace.shared.open(url)
             }

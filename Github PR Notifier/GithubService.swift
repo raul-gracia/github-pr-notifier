@@ -1,7 +1,8 @@
 import Foundation
 
-class GithubService {
+class GithubService: ObservableObject {
     static let shared = GithubService()
+    @Published var token: String = ""
     
     private init() {}
     
@@ -99,7 +100,7 @@ class GithubService {
         let url = URL(string: "https://api.github.com/graphql")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.addValue("Bearer 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", forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer  \(self.token)", forHTTPHeaderField: "Authorization")
         
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: ["query": query], options: [])

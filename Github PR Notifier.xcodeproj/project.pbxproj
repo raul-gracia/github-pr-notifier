@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9EBE1D092A75C5F700DAB8F4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */; };
+		9EBE1D0B2A75ED2600DAB8F4 /* TokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBE1D0A2A75ED2600DAB8F4 /* TokenInputView.swift */; };
 		9ECE34392A726EE000A2276E /* Github_PR_NotifierApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE34382A726EE000A2276E /* Github_PR_NotifierApp.swift */; };
 		9ECE343B2A726EE000A2276E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE343A2A726EE000A2276E /* ContentView.swift */; };
 		9ECE343D2A726EE200A2276E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE343C2A726EE200A2276E /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		9EBE1D072A747AB700DAB8F4 /* Github-PR-Notifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Github-PR-Notifier-Info.plist"; sourceTree = SOURCE_ROOT; };
 		9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9EBE1D0A2A75ED2600DAB8F4 /* TokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInputView.swift; sourceTree = "<group>"; };
 		9ECE34352A726EE000A2276E /* Github PR Notifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Github PR Notifier.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ECE34382A726EE000A2276E /* Github_PR_NotifierApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_PR_NotifierApp.swift; sourceTree = "<group>"; };
 		9ECE343A2A726EE000A2276E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				9ECE34652A7293CE00A2276E /* GithubService.swift */,
 				9ECE34672A73B4DE00A2276E /* Models.swift */,
 				9EBE1D082A75C5F700DAB8F4 /* Extensions.swift */,
+				9EBE1D0A2A75ED2600DAB8F4 /* TokenInputView.swift */,
 			);
 			path = "Github PR Notifier";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ECE34642A72939F00A2276E /* StatusItemView.swift in Sources */,
+				9EBE1D0B2A75ED2600DAB8F4 /* TokenInputView.swift in Sources */,
 				9EBE1D092A75C5F700DAB8F4 /* Extensions.swift in Sources */,
 				9ECE343B2A726EE000A2276E /* ContentView.swift in Sources */,
 				9ECE34662A7293CE00A2276E /* GithubService.swift in Sources */,
